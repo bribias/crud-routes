@@ -22,5 +22,24 @@ describe('genre CRUD routes', () => {
 
     expect(res.body).toEqual(genre);
   });
-});
+  it('gets all genres', async () => {
+    const genre1 = await Genre.insert({ name: 'New Wave', type: 'synth' });
+    const genre2 = await Genre.insert({
+      name: 'Drum & Bass',
+      type: 'electronic',
+    });
+    const res = await request(app).get('/api/v1/genres');
 
+    expect(res.body).toEqual([genre1, genre2]);
+  });
+  it('updates a genre by id', async () => {
+    const indie = await Genre.insert({ name: 'Indie Rock', type: 'rock' });
+    const genre = await Genre.insert({
+      name: 'New Wave',
+      type: 'synth',
+    });
+    const res = await request(app).put(`/api/v1/genres/${genre.id}`).send(indie);
+
+    expect(res.body).toEqual({ id: '1', ...indie });
+  });
+});
