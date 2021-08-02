@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS creatures;
 CREATE TABLE creatures (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
-    type TEXT NOT NULL
+    species TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS buffy_characters;
