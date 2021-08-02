@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS originals;
 CREATE TABLE originals (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
-    type TEXT NOT NULL
+    species TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS creatures;
@@ -30,9 +30,9 @@ CREATE TABLE creatures (
     type TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS buffy;
+DROP TABLE IF EXISTS buffyCharacters;
 
-CREATE TABLE buffy (
+CREATE TABLE buffyCharacters (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
     type TEXT NOT NULL
