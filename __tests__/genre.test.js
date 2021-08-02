@@ -39,4 +39,10 @@ describe('genre CRUD routes', () => {
 
     expect(res.body).toEqual({ id: '1', ...indie });
   });
+  it('deletes a genre', async () => {
+    const genre = await Genre.insert({ name: 'New Wave', type: 'synth' });
+    const res = await request(app).delete(`/api/v1/genres/${genre.id}`);
+
+    expect(res.body).toEqual({ message: `${genre.name} has been erased` });
+  });
 });
