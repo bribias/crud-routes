@@ -30,10 +30,10 @@ CREATE TABLE creatures (
     type TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS buffyCharacters;
+DROP TABLE IF EXISTS buffy_characters;
 
-CREATE TABLE buffyCharacters (
+CREATE TABLE buffy_characters (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
-    type TEXT NOT NULL
+    species TEXT NOT NULL
 );
