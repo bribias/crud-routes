@@ -2,64 +2,64 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
-import Buffy from '../lib/models/Buffy.js';
+import Creature from '../lib/models/Creatures';
 
-describe('character CRUD routes', () => {
+describe('creature CRUD routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
 
-  it('creates a character via POST', async () => {
-    const character = { name: 'Buffy Summers', species: 'slayer' };
-    const res = await request(app).post('/api/v1/buffy').send(character);
+  it('creates a creature via POST', async () => {
+    const creature = { name: 'Big Foot', species: 'yeti' };
+    const res = await request(app).post('/api/v1/creatures').send(creature);
 
-    expect(res.body).toEqual({ id: '1', ...character });
+    expect(res.body).toEqual({ id: '1', ...creature });
   });
 
-  it('gets a character by id', async () => {
-    const character = await Buffy.insert({
-      name: 'Buffy Summers',
-      species: 'slayer',
+  it('gets a creature by id', async () => {
+    const creature = await Creature.insert({
+      name: 'Big Foot',
+      species: 'yeti',
     });
-    const res = await request(app).get(`/api/v1/buffy/${character.id}`);
+    const res = await request(app).get(`/api/v1/creatures/${creature.id}`);
 
-    expect(res.body).toEqual(character);
+    expect(res.body).toEqual(creature);
   });
 
-  it('gets all character', async () => {
-    const character1 = await Buffy.insert({
-      name: 'Buffy Summers',
-      species: 'slayer',
+  it('gets all creature', async () => {
+    const creature1 = await Creature.insert({
+      name: 'Big Foot',
+      species: 'yeti',
     });
-    const character2 = await Buffy.insert({
-      name: 'Willow',
-      species: 'witch',
+    const creature2 = await Creature.insert({
+      name: 'Loch Ness',
+      species: 'swap',
     });
-    const res = await request(app).get('/api/v1/buffy');
+    const res = await request(app).get('/api/v1/creatures');
 
-    expect(res.body).toEqual([character1, character2]);
+    expect(res.body).toEqual([creature1, creature2]);
   });
 
-  it('updates a character by id', async () => {
-    const faith = { name: 'Faith', species: 'slayer' };
-    const character = await Buffy.insert({
-      name: 'Buffy Summers',
-      species: 'slayer',
+  it('updates a creature by id', async () => {
+    const kraken = { name: 'Kraken', species: 'sea creature' };
+    const creature = await Creature.insert({
+      name: 'Big Foot',
+      species: 'yeti',
     });
     const res = await request(app)
-      .put(`/api/v1/buffy/${character.id}`)
-      .send(faith);
+      .put(`/api/v1/creatures/${creature.id}`)
+      .send(kraken);
 
-    expect(res.body).toEqual({ id: '1', ...faith });
+    expect(res.body).toEqual({ id: '1', ...kraken });
   });
 
-  it('deletes a character', async () => {
-    const character = await Buffy.insert({
-      name: 'Buffy Summers',
-      species: 'slayer',
+  it('deletes a creature', async () => {
+    const creature = await Creature.insert({
+      name: 'Big Foot',
+      species: 'yeti',
     });
-    const res = await request(app).delete(`/api/v1/buffy/${character.id}`);
+    const res = await request(app).delete(`/api/v1/creatures/${creature.id}`);
 
-    expect(res.body).toEqual({ message: `${character.name} has been erased` });
+    expect(res.body).toEqual({ message: `${creature.name} has been erased` });
   });
 });
